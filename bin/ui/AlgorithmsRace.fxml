@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="279.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.AlgorithmsRaceGUI">
+   <center>
+      <Pane prefHeight="277.0" prefWidth="640.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="31.0" layoutY="36.0" text="N:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="textN" layoutX="59.0" layoutY="34.0" prefHeight="25.0" prefWidth="94.0" />
+            <Button layoutX="180.0" layoutY="34.0" mnemonicParsing="false" onAction="#Run" prefHeight="25.0" prefWidth="96.0" text="Run!" />
+            <RadioButton fx:id="add" layoutX="59.0" layoutY="156.0" mnemonicParsing="false" selected="true" text="Add">
+               <toggleGroup>
+                  <ToggleGroup fx:id="algorithm" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="search" layoutX="59.0" layoutY="186.0" mnemonicParsing="false" text="Search" toggleGroup="$algorithm" />
+            <RadioButton fx:id="delete" layoutX="60.0" layoutY="219.0" mnemonicParsing="false" text="Delete" toggleGroup="$algorithm" />
+            <RadioButton fx:id="iterative" layoutX="187.0" layoutY="156.0" mnemonicParsing="false" selected="true" text="Iterative">
+               <toggleGroup>
+                  <ToggleGroup fx:id="mode" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="recursive" layoutX="188.0" layoutY="186.0" mnemonicParsing="false" text="Recursive" toggleGroup="$mode" />
+            <Button layoutX="179.0" layoutY="215.0" mnemonicParsing="false" onAction="#reset" prefHeight="25.0" prefWidth="90.0" text="Reset" />
+            <Label layoutX="53.0" layoutY="107.0" text="Algorithm" textFill="#2b00ff">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="206.0" layoutY="107.0" text="Mode" textFill="#2b00ff">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="timekeeper" editable="false" layoutX="362.0" layoutY="57.0" />
+            <Label layoutX="362.0" layoutY="23.0" text="Timekeeper" textFill="#2b00ff">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="361.0" layoutY="190.0" text="ArrayList" />
+            <Label layoutX="453.0" layoutY="189.0" text="LinkedList" />
+            <Label layoutX="570.0" layoutY="190.0" text="BST" />
+            <TextField fx:id="timeArrayList" editable="false" layoutX="345.0" layoutY="218.0" prefHeight="25.0" prefWidth="77.0" />
+            <TextField fx:id="timeLinkedList" editable="false" layoutX="441.0" layoutY="218.0" prefHeight="25.0" prefWidth="77.0" />
+            <TextField fx:id="timeBST" editable="false" layoutX="541.0" layoutY="218.0" prefHeight="25.0" prefWidth="77.0" />
+            <Label layoutX="362.0" layoutY="93.0" text="Final Results" textFill="#2b00ff">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="50.0" fitWidth="78.0" layoutX="359.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../imgs/ArrayList.jpg" />
+               </image></ImageView>
+            <ImageView fitHeight="50.0" fitWidth="78.0" layoutX="455.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../imgs/LinkedList.jpg" />
+               </image></ImageView>
+            <ImageView fitHeight="50.0" fitWidth="54.0" layoutX="557.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../imgs/BST.jpg" />
+               </image></ImageView>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>
