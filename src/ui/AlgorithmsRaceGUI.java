@@ -8,10 +8,22 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import model.*;
+import threads.StructureThread;
 
 public class AlgorithmsRaceGUI {
 	
-	private RaceManager raceManager = new RaceManager();
+	private RaceManager raceManager;
+	
+	private StructureThread arrayListThread;
+	private StructureThread linkedListThread;
+	private StructureThread bstThread;
+	
+	public AlgorithmsRaceGUI() {
+		raceManager = new RaceManager();
+		arrayListThread = new StructureThread(raceManager.getArrayList());
+		linkedListThread = new StructureThread(raceManager.getLinkedList());
+		bstThread = new StructureThread(raceManager.getBst());
+	}
 
     @FXML
     private TextField textN;
@@ -53,25 +65,46 @@ public class AlgorithmsRaceGUI {
     void Run(ActionEvent event) {
     	
     	try {
+    		
+    		int n = Integer.parseInt(textN.getText());
+    		
+    		if(n<=0) {
+    			throw new NumberFormatException();
+    		}
+    		
+    		if(iterative.isSelected()) {
+    			arrayListThread.setInModeInterative(true);
+    			linkedListThread.setInModeInterative(true);
+    			bstThread.setInModeInterative(true);
+    		}else {
+    			arrayListThread.setInModeInterative(true);
+    			linkedListThread.setInModeInterative(true);
+    			bstThread.setInModeInterative(true);
+    		}
+    		
     		if(add.isSelected()) {
-        		if(iterative.isSelected()) {
-        			raceManager.startRaceAddIterative(textN.getText());
-        		}else {
-        			raceManager.startRaceAddRecursive(textN.getText());
-        		}
+    			
+    			arrayListThread.setMethod(StructureThread.ADD);
+    			linkedListThread.setMethod(StructureThread.ADD);
+    			bstThread.setMethod(StructureThread.ADD);
+    			
         	}else if(search.isSelected()) {
-        		if(iterative.isSelected()) {
-        			raceManager.startRaceSearchIterative(textN.getText());
-        		}else {
-        			raceManager.startRaceSearchRecursive(textN.getText());
-        		}
+        		
+        		arrayListThread.setMethod(StructureThread.SEARCH);
+    			linkedListThread.setMethod(StructureThread.SEARCH);
+    			bstThread.setMethod(StructureThread.SEARCH);
+        		
         	}else {
-        		if(iterative.isSelected()) {
-        			raceManager.startRaceDeleteIterative(textN.getText());
-        		}else {
-        			raceManager.startRaceDeleteRecursive(textN.getText());
-        		}
+        		
+        		arrayListThread.setMethod(StructureThread.REMOVE);
+    			linkedListThread.setMethod(StructureThread.REMOVE);
+    			bstThread.setMethod(StructureThread.REMOVE);
         	}
+    		
+    		arrayListThread.start();
+			linkedListThread.start();
+			bstThread.start();
+			
     	}catch(NumberFormatException e) {
     		Alert alert = new Alert(AlertType.WARNING);
     		alert.setTitle("Number invalidated");

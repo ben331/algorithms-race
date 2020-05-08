@@ -44,4 +44,12 @@ public class BSTElement {
 	public void setHead(BSTElement head) {
 		this.head = head;
 	}
+	
+	public BSTElement getMin() {
+		BSTElement min = this;
+		while(min.getLeft()!=null) {
+				min=min.getLeft();
+		}
+		return min;
+	}
 }
