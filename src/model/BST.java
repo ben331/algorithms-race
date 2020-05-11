@@ -17,6 +17,7 @@ public class BST extends DataStructure{
 		BSTElement root = rootElement;
 			
 		for(int i=0; i<n;i++) {
+			System.out.println("A"+i);
 			element = new BSTElement((long)Math.random());
 			while(!wasAdded) {
 				if(element.getNumber()<root.getNumber()) {

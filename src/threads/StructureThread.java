@@ -9,7 +9,7 @@ public class StructureThread extends Thread{
 	private DataStructure dataStructure;
 	
 	private char method;
-	private boolean inModeInterative;
+	private boolean inModeIterative;
 	private int n;
 	
 	public StructureThread(DataStructure dataStructure) {
@@ -21,8 +21,8 @@ public class StructureThread extends Thread{
 		this.method = method;
 	}
 	
-	public void setInModeInterative(boolean inModeInterative) {
-		this.inModeInterative = inModeInterative;
+	public void setInModeIterative(boolean inModeIterative) {
+		this.inModeIterative = inModeIterative;
 	}
 
 	public void setN(int n) {
@@ -34,7 +34,8 @@ public class StructureThread extends Thread{
 
 	@Override
 	public void run() {
-		if(inModeInterative) {
+		
+		if(inModeIterative) {
 			switch(method) {
 			case ADD:
 				dataStructure.addIterative(n);

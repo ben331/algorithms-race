@@ -5,7 +5,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.RaceManager;
 public class Main extends Application{
+	
+	private AlgorithmsRaceGUI controllerGUI;
+	private RaceManager raceManager;
+	
+	public Main() {
+		raceManager= new RaceManager();
+		controllerGUI = new AlgorithmsRaceGUI(raceManager);
+	}
 
 	public static void main(String[] args) {
 		launch(args);
@@ -13,7 +22,9 @@ public class Main extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("AlgorithmsRace.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("AlgorithmsRace.fxml"));
+		loader.setController(controllerGUI);
+		Parent root = loader.load();
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Basic Algorithms Race");

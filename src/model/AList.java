@@ -17,6 +17,7 @@ public class AList extends DataStructure{
 		for(int i=0; i<n; i++) {
 			element = (long)Math.random();
 			arrayListElements.add(element);
+			System.out.println("L"+i);
 		}
 	}
 
