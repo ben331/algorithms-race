@@ -22,7 +22,6 @@ public class AList extends DataStructure{
 		for(int i=0; i<n; i++) {
 			element = r.nextLong();
 			arrayListElements.add(element);
-			System.out.println("L"+i);
 		}
 	}
 

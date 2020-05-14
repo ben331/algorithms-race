@@ -30,6 +30,9 @@ public class AlgorithmsRaceGUI {
     private RadioButton add;
 
     @FXML
+    private Button buttonReset;
+    
+    @FXML
     private ToggleGroup algorithm;
 
     @FXML
@@ -72,6 +75,7 @@ public class AlgorithmsRaceGUI {
     void Run(ActionEvent event) {
     	
     	buttonRun.setDisable(true);
+    	buttonReset.setDisable(true);
     	
     	Random random = new Random();
     	
@@ -168,7 +172,7 @@ public class AlgorithmsRaceGUI {
 						String timekeeper = chronoTimekeeper.toString();
 						
 						try {
-							Thread.sleep(5);
+							Thread.sleep(3);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
@@ -195,12 +199,12 @@ public class AlgorithmsRaceGUI {
 					}
 					chronoTimekeeper.setActive(false);
 					
-					
 					animation1.setActive(false);
 					animation2.setActive(false);
 				}
 			}.start();
 			
+			enableButtons();
 			
     	}catch(NumberFormatException e) {
     		Alert alert = new Alert(AlertType.WARNING);
@@ -208,8 +212,6 @@ public class AlgorithmsRaceGUI {
     		alert.setContentText("Please, type a natural number");
     		alert.showAndWait();
     	}
-    	
-    	buttonRun.setDisable(false);
     }
 
     @FXML
@@ -245,5 +247,10 @@ public class AlgorithmsRaceGUI {
     
     public void updateBSTTime(String text) {
     	timeBST.setText(text);
+    }
+    
+    public void enableButtons() {
+    	buttonRun.setDisable(false);
+		buttonReset.setDisable(false);
     }
 }

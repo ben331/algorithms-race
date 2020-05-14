@@ -42,7 +42,7 @@
                </toggleGroup>
             </RadioButton>
             <RadioButton fx:id="recursive" layoutX="188.0" layoutY="186.0" mnemonicParsing="false" text="Recursive" toggleGroup="$mode" />
-            <Button layoutX="179.0" layoutY="215.0" mnemonicParsing="false" onAction="#reset" prefHeight="25.0" prefWidth="90.0" text="Reset" />
+            <Button fx:id="buttonReset" layoutX="179.0" layoutY="215.0" mnemonicParsing="false" onAction="#reset" prefHeight="25.0" prefWidth="90.0" text="Reset" />
             <Label layoutX="53.0" layoutY="107.0" text="Algorithm" textFill="#2b00ff">
                <font>
                   <Font size="18.0" />

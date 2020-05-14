@@ -29,8 +29,6 @@ public class LinkedList extends DataStructure{
 		
 		//Add each element at the end.
 		for(int i=0; i<n; i++) {
-			System.out.println("E"+i);
-			
 			element = new LinkedElement((long)Math.random());
 			last.setNext(element);
 			element.setPre(last);

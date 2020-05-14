@@ -70,7 +70,7 @@ public class StructureThread extends Thread{
 				}
 			}
 			
-		}catch(StackOverflowError e) {
+		}catch(StackOverflowError | OutOfMemoryError e ) {
 			
 			String structure;
 			
