@@ -23,9 +23,9 @@ public class Chronometer extends Thread{
         {
             while( active )
             {
-                Thread.sleep( 4 );
+                Thread.sleep( 1 );
                 
-                milli += 4;
+                milli += 1;
                  
                 
                 if( milli == 1000 )

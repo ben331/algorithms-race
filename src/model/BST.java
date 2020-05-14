@@ -1,12 +1,18 @@
 package model;
 
+import java.util.Random;
+
 public class BST extends DataStructure{
 	
 	private BSTElement rootElement;
+	
+	public void clear() {
+		rootElement = null;
+	}
 
 	@Override
-	public void addIterative(int n) {
-		BSTElement element = new BSTElement((long)Math.random());
+	public void addIterative(int n, Random r) {
+		BSTElement element = new BSTElement(r.nextLong());
 		boolean wasAdded=false;
 		
 		if(rootElement==null) {
@@ -43,12 +49,12 @@ public class BST extends DataStructure{
 	}
 
 	@Override
-	public void searchIterative(int n) {
+	public void searchIterative(int n, Random r) {
 		long element;
 		BSTElement nodo = rootElement;
 		boolean wasFounded=false;
 		for(int i=0; i<n; i++) {
-			element= (long)Math.random();
+			element= r.nextLong();
 			while(nodo!=null && !wasFounded) {
 				if(nodo.getNumber()<element) {
 					nodo = nodo.getLeft();
@@ -63,83 +69,88 @@ public class BST extends DataStructure{
 	}
 
 	@Override
-	public void removeIterative(int n) {
+	public void removeIterative(int n, Random r) {
 		long num;
 		BSTElement element;
 		for(int i=0;i<n ;i++) {
-			num = (long)Math.random();
+			num = r.nextLong();
 			element = searchRecursive(rootElement , num);
 			
-			if(element.getLeft()==null | element.getRight()==null) {      //Delete element with one child
-				if(element==rootElement) {
-					if(element.getLeft()!=null) {
-						element.getLeft().setHead(null);
-						rootElement=element.getLeft();
-					}else {
-						element.getRight().setHead(null);
-						rootElement=element.getRight();
-					}
-				}else {
-					if(element.getLeft()!=null) {
-						element.getLeft().setHead(element.getHead());
-						if(element.getHead().getLeft()==element) {
-							element.getHead().setLeft(element.getLeft());
+			
+			
+			if(element!=null) {
+				if(element.getLeft()==null | element.getRight()==null) {      //Delete element with one child
+					if(element==rootElement) {
+						if(element.getLeft()!=null) {
+							element.getLeft().setHead(null);
+							rootElement=element.getLeft();
 						}else {
-							element.getHead().setRight(element.getLeft());
-						}					
-					}else {
-						element.getRight().setHead(element.getHead());
-						if(element.getHead().getLeft()==element) {
-							element.getHead().setLeft(element.getRight());
-						}else {
-							element.getHead().setRight(element.getRight());
+							element.getRight().setHead(null);
+							rootElement=element.getRight();
 						}
-					}				
-				}
-				
-				
-			}else if(element.getLeft()==null && element.getRight()==null) {     //Delete sheet
-				if(element==rootElement) {
-					rootElement=null;
-				}else {
-					if(element.getHead().getLeft()==element) {
-						element.getHead().setLeft(null);
 					}else {
-						element.getHead().setRight(null);
+						if(element.getLeft()!=null) {
+							element.getLeft().setHead(element.getHead());
+							if(element.getHead().getLeft()==element) {
+								element.getHead().setLeft(element.getLeft());
+							}else {
+								element.getHead().setRight(element.getLeft());
+							}					
+						}else {
+							element.getRight().setHead(element.getHead());
+							if(element.getHead().getLeft()==element) {
+								element.getHead().setLeft(element.getRight());
+							}else {
+								element.getHead().setRight(element.getRight());
+							}
+						}				
 					}
-				}
-				
-				
-			}else {				                                             //Delete element with both children
-				BSTElement min = element.getRight().getMin();
-				removeRecursive(min);
-				min.setHead(element.getHead());
-				min.setRight(element.getRight());
-				min.setLeft(element.getLeft());
-				element.getLeft().setHead(min);
-				if(element.getRight()!=null) {
-					element.getRight().setHead(min);
-				}
-				if(element==rootElement) {
-					rootElement=min;
-				}else {
-					if(element.getHead().getLeft()==element) {
-						element.getHead().setLeft(min);
+					
+					
+				}else if(element.getLeft()==null && element.getRight()==null) {     //Delete sheet
+					if(element==rootElement) {
+						rootElement=null;
 					}else {
-						element.getHead().setRight(min);
+						if(element.getHead().getLeft()==element) {
+							element.getHead().setLeft(null);
+						}else {
+							element.getHead().setRight(null);
+						}
+					}
+					
+					
+				}else {				                                             //Delete element with both children
+					BSTElement min = element.getRight().getMin();
+					removeRecursive(min);
+					min.setHead(element.getHead());
+					min.setRight(element.getRight());
+					min.setLeft(element.getLeft());
+					element.getLeft().setHead(min);
+					if(element.getRight()!=null) {
+						element.getRight().setHead(min);
+					}
+					if(element==rootElement) {
+						rootElement=min;
+					}else {
+						if(element.getHead().getLeft()==element) {
+							element.getHead().setLeft(min);
+						}else {
+							element.getHead().setRight(min);
+						}
 					}
 				}
 			}
+			
 		}
 	}
 
 	@Override
-	public void addRecursive(int i, int n) {
+	public void addRecursive(int i, int n, Random r) {
 		BSTElement element;
 		if(i<n) {
-			element = new BSTElement((long)Math.random());
+			element = new BSTElement((r.nextLong()));
 			addRecursive(element, rootElement);
-			addRecursive(i+1, n);
+			addRecursive(i+1, n, r);
 		}
 	}
 	
@@ -165,12 +176,12 @@ public class BST extends DataStructure{
 	}
 
 	@Override
-	public void searchRecursive(int i, int n) {
+	public void searchRecursive(int i, int n, Random r) {
 		long element;
 		if(i<n) {
-			element= (long)Math.random();
+			element= r.nextLong();
 			searchRecursive(rootElement, element);
-			searchRecursive(i+1,n);
+			searchRecursive(i+1,n,r);
 		}
 	}
 	
@@ -189,13 +200,13 @@ public class BST extends DataStructure{
 	}
 
 	@Override
-	public void removeRecursive(int i, int n) {
+	public void removeRecursive(int i, int n, Random r) {
 		long num;
 		if(i<n) {
-			num = (long)Math.random();
+			num = r.nextLong();
 			BSTElement element = searchRecursive(rootElement, num);
 			removeRecursive(element);
-			removeRecursive(i+1,n);
+			removeRecursive(i+1,n,r);
 		}
 	}
 	

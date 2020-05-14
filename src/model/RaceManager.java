@@ -24,4 +24,10 @@ public class RaceManager {
 	public DataStructure getBst() {
 		return bst;
 	}
+	
+	public void clearData() {
+		arrayList.clear();
+		linkedList.clear();
+		bst.clear();
+	}
 }

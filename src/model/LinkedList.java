@@ -1,16 +1,22 @@
 package model;
 
+import java.util.Random;
+
 public class LinkedList extends DataStructure{
 	
 	private LinkedElement firstLinkedElement;
+	
+	public void clear() {
+		firstLinkedElement=null;
+	}
 
 	@Override
-	public void addIterative(int n) {
+	public void addIterative(int n, Random r) {
 		LinkedElement element;
 		
 		//Case for empty list.
 		if(firstLinkedElement==null) {
-			element = new LinkedElement((long)Math.random());
+			element = new LinkedElement(r.nextLong());
 			firstLinkedElement=element;
 			n-=1;
 		}
@@ -33,11 +39,11 @@ public class LinkedList extends DataStructure{
 	}
 
 	@Override
-	public void searchIterative(int n) {
+	public void searchIterative(int n, Random r) {
 		long element;
 		LinkedElement current = firstLinkedElement;
 		for(int i=0; i<n;i++) {
-			element = (long)Math.random();
+			element = r.nextLong();
 			while(current!=null  && current.getNumber()!=element) {
 				current=current.getNext();
 			}
@@ -45,12 +51,12 @@ public class LinkedList extends DataStructure{
 	}
 
 	@Override
-	public void removeIterative(int n) {
+	public void removeIterative(int n, Random r) {
 		long element;
 		LinkedElement current;
 		
 		for(int i=0; i<n;i++) {
-			element = (long)Math.random();
+			element = r.nextLong();
 			current = firstLinkedElement;
 			
 			//Search element
@@ -77,12 +83,12 @@ public class LinkedList extends DataStructure{
 	}
 
 	@Override
-	public void addRecursive(int i, int n) {
+	public void addRecursive(int i, int n, Random r) {
 		LinkedElement element;	
 		
 		//Case for empty list.
 		if(firstLinkedElement==null) {
-			element = new LinkedElement((long)Math.random());
+			element = new LinkedElement(r.nextLong());
 			firstLinkedElement=element;
 			n-=1;
 		}
@@ -94,28 +100,27 @@ public class LinkedList extends DataStructure{
 		}
 		
 		//Add each element at the end.
-		addRecursive(last, i, n);
+		addRecursive(last, i, n, r);
 		
 	}
 	
-	private void addRecursive(LinkedElement last, int i, int n) {
+	private void addRecursive(LinkedElement last, int i, int n, Random r) {
 		if (i<n){
-			LinkedElement element = new LinkedElement((long)Math.random());
+			LinkedElement element = new LinkedElement(r.nextLong());
 			
 			last.setNext(element);
 			element.setPre(last);
-			last=element;
-			addRecursive(last,i++,n);
+			addRecursive(element,i++,n, r);
 		}
 	}
 
 	@Override
-	public void searchRecursive(int i, int n) {
+	public void searchRecursive(int i, int n, Random r) {
 		long element;
 		if(i<n) {
 			element = (long)Math.random();
 			searchRecursive(element, firstLinkedElement);
-			searchRecursive(i+1,n);
+			searchRecursive(i+1,n,r);
 		}
 	}
 	
@@ -126,12 +131,12 @@ public class LinkedList extends DataStructure{
 	}
 
 	@Override
-	public void removeRecursive(int i, int n) {
+	public void removeRecursive(int i, int n, Random r) {
 		long element;
 		if(i<n) {
 			element = (long)Math.random();
 			removeRecursive(element, firstLinkedElement);
-			removeRecursive(i+1,n);
+			removeRecursive(i+1,n,r);
 		}
 	}
 	
