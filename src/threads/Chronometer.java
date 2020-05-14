@@ -13,19 +13,15 @@ public class Chronometer extends Thread{
 		this.active = active;
 	}
 	
-	public void restart() {
-		min=seg=milli=0;
-	}
-	
 	@Override
 	public void run() {
 		try
         {
             while( active )
             {
-                Thread.sleep( 1 );
+                Thread.sleep( 4 );
                 
-                milli += 1;
+                milli += 4;
                  
                 
                 if( milli == 1000 )

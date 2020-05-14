@@ -25,29 +25,29 @@ public class CircleAnimationThread extends Thread{
 		if(startDecreasing) {
 			while(active) {
 				while(circle.getRadius() >1) {
-					try {
-						Thread.sleep(13);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
 					double radius = decrease(circle);
 					Platform.runLater( new Thread() {
 						@Override
 						public void run() {
+							try {
+								Thread.sleep(13);
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
 							controllerGUI.updateWhiteCircle(radius);
 						}
 					});
 				}
 				while(circle.getRadius() < 40) {
-					try {
-						Thread.sleep(13);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					double radius = increase(circle);
+					double radius = decrease(circle);
 					Platform.runLater( new Thread() {
 						@Override
 						public void run() {
+							try {
+								Thread.sleep(13);
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
 							controllerGUI.updateWhiteCircle(radius);
 						}
 					});
@@ -56,29 +56,29 @@ public class CircleAnimationThread extends Thread{
 		}else {
 			while(active) {
 				while(circle.getRadius() < 40) {
-					try {
-						Thread.sleep(13);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					double radius = increase(circle);
+					double radius = decrease(circle);
 					Platform.runLater( new Thread() {
 						@Override
 						public void run() {
+							try {
+								Thread.sleep(13);
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
 							controllerGUI.updateBlueCircle(radius);
 						}
 					});
 				}
 				while(circle.getRadius() >1) {
-					try {
-						Thread.sleep(13);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
 					double radius = decrease(circle);
 					Platform.runLater( new Thread() {
 						@Override
 						public void run() {
+							try {
+								Thread.sleep(13);
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
 							controllerGUI.updateBlueCircle(radius);
 						}
 					});

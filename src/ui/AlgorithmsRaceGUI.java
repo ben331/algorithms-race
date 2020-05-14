@@ -1,8 +1,5 @@
 package ui;
 
-import java.util.Random;
-
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
@@ -73,15 +70,10 @@ public class AlgorithmsRaceGUI {
     	
     	buttonRun.setDisable(true);
     	
-    	Random random = new Random();
-    	
-    	whiteCircle.setRadius(40);
-    	blueCircle.setRadius(1);
-    	
     	//Create threads
-    	StructureThread arrayListThread = new StructureThread(raceManager.getArrayList(), random);
-    	StructureThread linkedListThread = new StructureThread(raceManager.getLinkedList(), random);
-    	StructureThread bstThread = new StructureThread(raceManager.getBst(), random);
+    	StructureThread arrayListThread = new StructureThread(raceManager.getArrayList());
+    	StructureThread linkedListThread = new StructureThread(raceManager.getLinkedList());
+    	StructureThread bstThread = new StructureThread(raceManager.getBst());
 		Chronometer chronoTimekeeper = new Chronometer();
 		Chronometer chronoArrayList = new Chronometer();
 		Chronometer chronoLinkedList = new Chronometer();
@@ -154,52 +146,30 @@ public class AlgorithmsRaceGUI {
 			//Start Animations
 			animation1.setActive(true);
 			animation2.setActive(true);
+			
 			animation1.start();
 			animation2.start();
 			
-			new Thread() {
-				@Override
-				public void run() {
-					while((arrayListThread.isAlive() || linkedListThread.isAlive()) || bstThread.isAlive()) {
-						
-						String array = chronoArrayList.toString();
-						String linked = chronoLinkedList.toString();
-						String bst = chronoBST.toString();
-						String timekeeper = chronoTimekeeper.toString();
-						
-						try {
-							Thread.sleep(5);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-						
-						Platform.runLater( new Thread() {
-							@Override
-							public void run(){
-								updateTimekeeper(timekeeper);
-								updateArrayListTime(array);
-								updateLinkedListTime(linked);
-								updateBSTTime(bst);
-							}
-						});
-						
-						
-						
-						if(!arrayListThread.isAlive()) {
-							chronoArrayList.setActive(false);
-						}if(!linkedListThread.isAlive()) {
-							chronoLinkedList.setActive(false);
-						}if(!bstThread.isAlive()) {
-							chronoBST.setActive(false);
-						}
-					}
-					chronoTimekeeper.setActive(false);
-					
-					
-					animation1.setActive(false);
-					animation2.setActive(false);
+			while((arrayListThread.isAlive() || linkedListThread.isAlive()) || bstThread.isAlive()) {
+			
+				timeArrayList.setText(chronoArrayList.toString());
+				timeLinkedList.setText(chronoLinkedList.toString());
+				timeBST.setText(chronoBST.toString());
+				timekeeper.setText(chronoTimekeeper.toString());
+				
+				System.out.println(chronoTimekeeper.toString()+"-----------------------------------------------");
+				
+				if(!arrayListThread.isAlive()) {
+					chronoArrayList.setActive(false);
+				}if(!linkedListThread.isAlive()) {
+					chronoLinkedList.setActive(false);
+				}if(!bstThread.isAlive()) {
+					chronoBST.setActive(false);
 				}
-			}.start();
+			}
+			chronoTimekeeper.setActive(false);
+			animation1.setActive(false);
+			animation2.setActive(false);
 			
 			
     	}catch(NumberFormatException e) {
@@ -220,30 +190,15 @@ public class AlgorithmsRaceGUI {
 		timeBST.setText("00:00:000");		
 		whiteCircle.setRadius(40);
 		blueCircle.setRadius(1);
-		raceManager.clearData();
     }
     
     public void updateWhiteCircle(double r) {
+    	System.out.println("w");
     	whiteCircle.setRadius(r);
     }
     
     public void updateBlueCircle(double r) {
+    	System.out.println("b");
     	blueCircle.setRadius(r);
-    }
-    
-    public void updateTimekeeper(String text) {
-    	timekeeper.setText(text);
-    }
-    
-    public void updateArrayListTime(String text) {
-    	timeArrayList.setText(text);
-    }
-    
-    public void updateLinkedListTime(String text) {
-    	timeLinkedList.setText(text);
-    }
-    
-    public void updateBSTTime(String text) {
-    	timeBST.setText(text);
     }
 }
