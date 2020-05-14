@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class AList extends DataStructure{
 	
@@ -9,24 +10,28 @@ public class AList extends DataStructure{
 	public AList(){
 		arrayListElements = new ArrayList<Long>();
 	}
+	
+	public void clear(){
+		arrayListElements = new ArrayList<Long>();
+	}
 
 	@Override
-	public void addIterative(int n) {
+	public void addIterative(int n, Random r) {
 		Long element;
 		
 		for(int i=0; i<n; i++) {
-			element = (long)Math.random();
+			element = r.nextLong();
 			arrayListElements.add(element);
 			System.out.println("L"+i);
 		}
 	}
 
 	@Override
-	public void searchIterative(int n) {
+	public void searchIterative(int n, Random r) {
 		long element;
 		boolean founded = false;
 		for(int i=0; i<n;i++) {
-			element = (long)Math.random();
+			element = r.nextLong();
 			for(int j=0; j<arrayListElements.size() && !founded;j++) {
 
 				founded=arrayListElements.get(j).longValue()==element;
@@ -36,11 +41,11 @@ public class AList extends DataStructure{
 	}
 
 	@Override
-	public void removeIterative(int n) {
+	public void removeIterative(int n, Random r) {
 		long element;
 		boolean removed= false;
 		for(int i=0; i<n;i++) {
-			element = (long)Math.random();
+			element = r.nextLong();
 			for(int j=0; j<arrayListElements.size() && !removed;j++) {
 
 				if(arrayListElements.get(j).longValue()==element) {
@@ -53,23 +58,23 @@ public class AList extends DataStructure{
 	}
 
 	@Override
-	public void addRecursive(int i, int n) {
+	public void addRecursive(int i, int n, Random r) {
 		Long element;
 		
 		if(i<n) {
-			element = (long)Math.random();
+			element = r.nextLong();
 			arrayListElements.add(element);
-			addRecursive(i+1, n);
+			addRecursive(i+1, n, r);
 		}
 	}
 
 	@Override
-	public void searchRecursive(int i, int n) {
+	public void searchRecursive(int i, int n, Random r) {
 		long element;
 		if(i<n) {
-			element = (long)Math.random();
+			element = r.nextLong();
 			searchRecursive(element,0);
-			searchRecursive(i+1, n);
+			searchRecursive(i+1, n, r);
 		}
 	}
 	
@@ -85,11 +90,12 @@ public class AList extends DataStructure{
 	
 	
 	@Override
-	public void removeRecursive(int i, int n) {
+	public void removeRecursive(int i, int n, Random r) {
 		long element;
 		if(i<n) {
-			element = (long)Math.random();
+			element = r.nextLong();
 			removeRecursive(element,0);
+			removeRecursive(i, n, r);
 		}
 	}
 	
